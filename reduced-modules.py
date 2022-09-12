@@ -96,9 +96,8 @@ def reduced_module(YD):
 # TESTING SUITE:
 # Here we apply the code to specific examples.
 
-#print("(T1,T2,T3,T4) = ", reduced_module([4,4,2]))
 data = {}
-for dim in range(2,40):
+for dim in range(2,70):
 
     counter1 = 2
     counter2 = 0
@@ -128,7 +127,11 @@ for dim in range(2,40):
     p4=round(100*(counter4)/no_parts,2)
     data[dim]=p1,p2,p3,p4
 
-print ("{:<4} {:<10} {:<10} {:<10} {:<10}".format('Dim','T1','T2','T3','T4'))
+# We write the data computed to the file "type-data"
+f = open("type-data.txt","w")
+f.write("{:<4} {:<10} {:<10} {:<10} {:<10}".format('Dim','T1','T2','T3','T4'))
 for dim, c in data.items():
     t1,t2,t3,t4=c
-    print ("{:<4} {:<10} {:<10} {:<10} {:<10}".format(dim, t1,t2,t3,t4))
+    f.write("\n")
+    f.write("{:<4} {:<10} {:<10} {:<10} {:<10}".format(dim, t1,t2,t3,t4))
+f.close()
