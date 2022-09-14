@@ -1,6 +1,3 @@
-import numpy as np
-from partitions import quick_partition
-
 # This is the T1 test: it checks if monomials appear dropping the
 # larger exponent by one, but not to 0
 def property_check(A,B):
@@ -72,38 +69,3 @@ def type_tests(SH,G):               # Test for Types
             T4 = 1
 
     return [T1,T2,T3,T4]
-
-# TESTING SUITE:
-# Here we apply the code to specific examples.
-
-Young_Diagram = [4,3,2,1]
-(Red,Mod) = reduced_module(Young_Diagram)
-print(Red,Mod)
-print (type_tests(Red,Mod))
-
-max_dim = 20
-data = {}                               # Here we store all data computed
-for dim in range(2,max_dim):
-    counter = np.array([2,0,0,0])
-    partitions = list(quick_partition(dim))
-    N = len(partitions)
-
-    for YD in partitions:
-        if len(YD)>1 and YD[0]>1:
-            (SH,G) = reduced_module(YD)
-            types = type_tests(SH,G)
-            if(types == [0,0,0,0]):
-                print("PROBELM")
-                break
-            counter = np.add(types,counter)
-
-    data[dim] = tuple(round(100*(counter[i])/N,2) for i in range(4))
-
-# We write the data computed to the file "type-data"
-f = open("type-data.txt","x")
-f.write("{:<4} {:<10} {:<10} {:<10} {:<10}".format('Dim','T1','T2','T3','T4'))
-for dim, c in data.items():
-    t1,t2,t3,t4=c
-    f.write("\n")
-    f.write("{:<4} {:<10} {:<10} {:<10} {:<10}".format(dim, t1,t2,t3,t4))
-f.close()
