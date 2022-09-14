@@ -1,2 +1,4 @@
 type-data.txt
 type-data1.txt
+.DS_Store
+__pycache__/
