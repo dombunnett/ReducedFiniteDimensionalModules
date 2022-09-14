@@ -1,5 +1,4 @@
-from reducedModules import reduced_module
-from reducedModules import type_tests
+from reducedModules import reduced_module, type_tests
 
 #YD = list(map(int,input("Enter Young diagram: ").split()))
 YD = [6,4,2,2,2,2,2]
