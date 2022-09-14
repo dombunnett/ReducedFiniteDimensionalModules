@@ -1,32 +1,12 @@
-# Very slow partition computing algorithm
-def quick_partition(n):
-    a = [0 for i in range(n + 1)]
-    k = 1
-    y = n - 1
-    while k != 0:
-        x = a[k - 1] + 1
-        k -= 1
-        while 2 * x <= y:
-            a[k] = x
-            y -= x
-            k += 1
-        l = k + 1
-        while x <= y:
-            a[k] = x
-            a[l] = y
-            yield tuple(sorted(a[:k + 2], reverse=True))
-            x += 1
-            y -= 1
-        a[k] = x + y
-        y = x + y - 1
-        yield tuple(sorted(a[:k + 1], reverse = True))
+import numpy as np
+from partitions import quick_partition
 
-# This is the T1 test: it checks if monomials appear dropping an
-# exponent by one, but not to 0
+# This is the T1 test: it checks if monomials appear dropping the
+# larger exponent by one, but not to 0
 def property_check(A,B):
     T1set = B.copy()    # We copy the second set. If an element satisfies the
                         # property we remove it from this set.
-    T1 = False
+    T1 = 0
 
     for (a,b) in B:
         if a>=-b and (a-1,b) in A and a>1:
@@ -38,14 +18,15 @@ def property_check(A,B):
 
     if len(T1set)==0:   # If this set is empty, the T1 property holds and thus
                         # T1 is true
-        T1 = True
+        T1 = 1
     return T1
 
 # This is our main function. We provide it with a Young diagram and it computes
 # (as a list of generators) the reduced submodule.
-# YD is our Young diagram. G our set of generators and SH is
-# the generators for the reduced submodule.
-# A monomial corresponds to a point via: x^a y^b <-> (a,-b)
+#
+# YD is our Young diagram. G our set of generators and SH is the generators for
+# the reduced submodule. A monomial corresponds to a point via:
+#  x^a y^b <-> (a,-b)
 
 def reduced_module(YD):
     k=len(YD)
@@ -54,8 +35,7 @@ def reduced_module(YD):
         if YD[i]<YD[i-1]:
             G.add((YD[i],-i))
 
-    # First we add all true sharp points
-    SH = set()
+    SH = set()                      # First we add all true sharp points
 
     for i in range(k-1):
         if YD[i]>YD[i+1]:
@@ -71,64 +51,56 @@ def reduced_module(YD):
         SH.add((YD[0],0))
     if YD[k-1]>1:
         SH.add((0,-k))
+    return (SH,G)
 
-    # Test for Type 1
-    T1 = property_check(SH,G)
+# TYPE TEST
+# The following function tests for the type of the module.
+# It takes as input the module and the reduced submodule.
 
-    # Test for Type 2
-    T2 = False
-    if T1 == False and len(G.intersection(SH))==0: # Check intersection
-        T2 = True
-
-    # Test for Type 3 & 4
-    T3 = False
-    T4 = False
+def type_tests(SH,G):               # Test for Types
+    T1 = property_check(SH,G)       # Type 1
+    T2 = 0
+    if T1 == 0 and len(G.intersection(SH))==0: # Check intersection
+        T2 = 1
+    T3 = 0                      # Test for Type 3 & 4
+    T4 = 0
     if len(G.intersection(SH)) != 0: # If intersection non-emtpy
         G1 = G-SH
         SH1 = SH-G
         T3 = property_check(SH1,G1)
-        if T3 == False:
-            T4 = True
+        if T3 == 0:
+            T4 = 1
 
-    return (T1,T2,T3,T4)
-
+    return [T1,T2,T3,T4]
 
 # TESTING SUITE:
 # Here we apply the code to specific examples.
 
-data = {}
-for dim in range(2,70):
+Young_Diagram = [4,3,2,1]
+(Red,Mod) = reduced_module(Young_Diagram)
+print(Red,Mod)
+print (type_tests(Red,Mod))
 
-    counter1 = 2
-    counter2 = 0
-    counter3 = 0
-    counter4 = 0
+max_dim = 20
+data = {}                               # Here we store all data computed
+for dim in range(2,max_dim):
+    counter = np.array([2,0,0,0])
     partitions = list(quick_partition(dim))
-    no_parts = len(partitions)
+    N = len(partitions)
 
     for YD in partitions:
         if len(YD)>1 and YD[0]>1:
-            (TEST1,TEST2,TEST3,TEST4) = reduced_module(YD)
-            if TEST1 == True:
-                counter1+=1
-                #print("T1:",*YD)
-            if TEST2==True:
-                counter2+=1
-                #print("T2:",*YD)
-            if TEST3 == True:
-                counter3+=1
-                #print("T3:",*YD)
-            if TEST4==True:
-                counter4+=1
+            (SH,G) = reduced_module(YD)
+            types = type_tests(SH,G)
+            if(types == [0,0,0,0]):
+                print("PROBELM")
+                break
+            counter = np.add(types,counter)
 
-    p1=round(100*(counter1)/no_parts,2)
-    p2=round(100*(counter2)/no_parts,2)
-    p3=round(100*(counter3)/no_parts,2)
-    p4=round(100*(counter4)/no_parts,2)
-    data[dim]=p1,p2,p3,p4
+    data[dim] = tuple(round(100*(counter[i])/N,2) for i in range(4))
 
 # We write the data computed to the file "type-data"
-f = open("type-data.txt","w")
+f = open("type-data.txt","x")
 f.write("{:<4} {:<10} {:<10} {:<10} {:<10}".format('Dim','T1','T2','T3','T4'))
 for dim, c in data.items():
     t1,t2,t3,t4=c
