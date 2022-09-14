@@ -8,8 +8,9 @@ from partitions import quick_partition
 Young_Diagram = list(map(int,input("Enter Young diagram: ").split()))
 if(len(Young_Diagram)>1):
     (Red,Mod) = reduced_module(Young_Diagram)
-    print(Red,Mod)
-    print (type_tests(Red,Mod))
+    print("SH : ", Red)
+    print("Gens : ", Mod)
+    print ("Type : ", type_tests(Red,Mod))
 else:
     print("Nonsense detected, compute it yourself! Moving on...")
 

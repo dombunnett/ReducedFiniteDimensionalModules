@@ -1,10 +1,9 @@
 from reducedModules import reduced_module, type_tests
 
-#YD = list(map(int,input("Enter Young diagram: ").split()))
-YD = [6,4,2,2,2,2,2]
+YD = list(map(int,input("Enter Young diagram: ").split()))
+#YD = [4,3,2,1]
 (SH,G) = reduced_module(YD)
 
-print(G,"\n",SH)
 print("Type = ",type_tests(SH,G))
 
 print("-"*(2*YD[0])) # Line fill for clarity
@@ -15,7 +14,7 @@ picC={}         # The complement of the two.
 
 # Makes and prints the original Yound diagram
 for i in range(len(YD)):
-    picA[i] = "_|" * YD[i] + "   "
+    picA[i] = "_|" * YD[i] + "  "      # Empty spaces for latter use
 for i in range(len(YD)):
     print(picA[i])
 picA[len(YD)] = "  "
