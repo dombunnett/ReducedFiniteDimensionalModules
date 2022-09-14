@@ -19,20 +19,21 @@ else:
 max_dim = int(input("Enter the maximum dimension to be tested: "))
 name = str(input("Name file to save data under: "))
 data = {}                               # Here we store all data computed
-for dim in range(2,max_dim+1):
+for dim in range(2,max_dim+1):          # Loop over all dimensions
     counter = np.array([2,0,0,0])
-    partitions = list(quick_partition(dim))
-    N = len(partitions)
+    partitions = list(quick_partition(dim)) # Compute the partitions
+    N = len(partitions)                     # How many partitions?
 
-    for YD in partitions:
-        if len(YD)>1 and YD[0]>1:
-            (SH,G) = reduced_module(YD)
-            types = type_tests(SH,G)
-            if(types == [0,0,0,0]):
+    for YD in partitions:                   # Loop over all YDs of that
+        if len(YD)>1 and YD[0]>1:           # dimension.
+            (SH,G) = reduced_module(YD)     # Compute reduced module
+            types = type_tests(SH,G)        # Compute its types
+            if(types == [0,0,0,0]):         # Check for impossible behaviour
                 print("PROBELM")
                 break
-            counter = np.add(types,counter)
-
+            counter = np.add(types,counter) # Add to counter.
+                                            # Compute distribution for that
+                                            # dimension in %.
     data[dim] = tuple(round(100*(counter[i])/N,2) for i in range(4))
 
 # We write the data computed to the file named above.
