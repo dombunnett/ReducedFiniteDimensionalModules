@@ -16,9 +16,9 @@ while True:
         if(all(x>=y for x, y in zip(YD, YD[1:]))): # Checks decreasing sequence
             if(len(YD)>1 and YD[0]>1):
                 (Red,Mod) = reduced_module(YD)
-                print("> SH : ", Red)
-                print("> Gens : ", Mod)
-                print ("> Type : ", type_tests(Red,Mod))
+                print("> Generators of M : ", Mod)
+                print("> R(M) generators : ", Red)
+                print("> Type : ", type_tests(Red,Mod))
             else:
                 print("> Enter more serious Young diagram")
         else:
