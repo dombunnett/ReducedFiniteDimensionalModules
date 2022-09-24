@@ -1,7 +1,7 @@
 # ReducedFiniteDimensionalModules
 
 Code accompanying the paper: "Reduced submodules of finite dimensional polynomial modules".
-Any object?? described or referred to here is defined and studied in the paper.
+Any object described or referred to here is defined and studied in the paper.
 
 ## Purpose
 The purpose of this code is the aid of the study of reduced submodules of finite dimensional
