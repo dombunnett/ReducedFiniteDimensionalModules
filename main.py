@@ -22,6 +22,6 @@ while True:
             else:
                 print("> Enter more serious Young diagram")
         else:
-            print("Ensure sequence is decreasing")
+            print("> Ensure sequence is decreasing")
     else:
         print("> Please enter in the correct form, e.g. '4 3 2 1' ")
