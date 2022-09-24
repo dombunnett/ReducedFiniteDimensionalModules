@@ -99,5 +99,10 @@ _|*|
 The first diagram is the original young diagram. The second is with the generators of R(M)
 marked by ```*``` and the third shows the overlap.
 
+In order to exit the program type:
+```
+exit
+```
+
 ## References
 [Reduced submodules of finite dimensional polynomial modules - Tilahun Abebaw, Nega Arega, Teklemichael Worku Bihonegn, Dominic Bunnett, David Ssevviiri]()
