@@ -3,6 +3,8 @@
 Code accompanying the paper: "Reduced submodules of finite dimensional polynomial modules".
 Any object described or referred to here is defined and studied in the paper.
 
+All to be run in python3
+
 ## Purpose
 The purpose of this code is the aid of the study of reduced submodules of finite dimensional
 polynomial modules. Let k be a field, R = k[x,y] and I be a monomial ideal of R. Consider
