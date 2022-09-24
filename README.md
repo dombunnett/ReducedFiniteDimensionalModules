@@ -106,3 +106,6 @@ exit
 
 ## References
 [Reduced submodules of finite dimensional polynomial modules - Tilahun Abebaw, Nega Arega, Teklemichael Worku Bihonegn, Dominic Bunnett, David Ssevviiri]()
+
+## Authors
+Contact [Dominic Bunnett](https://sites.google.com/view/bunnett/) in case of questions.
