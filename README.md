@@ -1,7 +1,7 @@
 # ReducedFiniteDimensionalModules
 
 Code accompanying the paper: "Reduced submodules of finite dimensional polynomial modules".
-Any object?? described or refered to here is defined and studied in the paper.
+Any object?? described or referred to here is defined and studied in the paper.
 
 ## Purpose
 The purpose of this code is the aid of the study of reduced submodules of finite dimensional
@@ -16,13 +16,13 @@ is.
 "data.py" file cycles through every possible module up to a given dimension and records the
 distribution of the four types, saving the data.
 
-The pictures.py file produces pictures of the Young diagrams associated with each of the 
+The pictures.py file produces pictures of the Young diagrams associated with each of the
 modules and a picture which highlights the differences between M and R(M). This is to help
 researchers consider many pictorial examples in order to gain quickly intuition.
 
 ## Usage
 ### main.py
-Input taken as standard input as a decreasing sequence of positive integers seperated by a
+Input taken as standard input as a decreasing sequence of positive integers separated by a
 space. For example:
 ```
 Enter Young diagram in the form: * * ... *
@@ -37,13 +37,13 @@ Output is given is the following form:
 Where a pair (a,-b) represents a monomial $x^ay^b$ and a 1 in the $i^{th}$ position means
 type $i$ for $i = 1,...,4$.
 
-In order to exit the programm type:
+In order to exit the program type:
 ```
 exit
 ```
 
 ### data.py
-Input is given as maximum dimension to be tested. Then one eneters the name of the file
+Input is given as maximum dimension to be tested. Then one enters the name of the file
 where the data will be saved. For example:
 ```
 Enter the maximum dimension: 5   
@@ -57,21 +57,47 @@ Dim  T1         T2         T3         T4
 4    40.0       40.0       20.0       0.0
 5    28.57      28.57      42.86      0.0
 ~                                                                                                                                                             
-                                                                                                                                                           
+
 "data-test.txt" [noeol] 5L, 244C
 ```
 In each collumn is the percentage share of that type of the given dimension.
 
 ### pictures.py
-Input taken as standard input as a decreasing sequence of positive integers seperated by a
+Input taken as standard input as a decreasing sequence of positive integers separated by a
 space. For example:
 ```
-Enter Young diagram: 4 3 2 1
+Enter Young diagram in the form: * * ... *
+>10 9 3 3 2 1
 ```
-Ouput 
+Output is of the following form:
 ```
+Type =  [0, 0, 1, 0]
+--------------------
+_|_|_|_|_|_|_|_|_|_|  
+_|_|_|_|_|_|_|_|_|  
+_|_|_|  
+_|_|_|  
+_|_|  
+_|  
 
+--------------------
+_|_|_|_|_|_|_|_|_|*|
+_|_|_|_|_|_|_|_|*|
+_|_|_|*
+_|_|*|
+_|*|
+*|
+
+--------------------
+                  |*|
+                |*|
+
+    |*|
+  |*|
+|*|
 ```
+The first diagram is the original young diagram. The second is with the generators of R(M)
+marked by ```*``` and the third shows the overlap.
 
 ## References
 [Reduced submodules of finite dimensional polynomial modules - Tilahun Abebaw, Nega Arega, Teklemichael Worku Bihonegn, Dominic Bunnett, David Ssevviiri]()
