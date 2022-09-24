@@ -11,9 +11,8 @@ polynomial modules. Let k be a field, R = k[x,y] and I be a monomial ideal of R.
 the module M = R/I. We wish to study the subset R(M) of M called the maximal reduced
 submodule. A monomial ideal of R can be given by a Young diagram.
 
-"main.py" provided takes as input a Young diagram and outputs generators for the
-corresponding module M and for R(M). It also outputs which of the four possible types R(M)
-is.
+"main.py" takes as input a Young diagram and outputs generators for the corresponding module
+M and for R(M). It also outputs which of the four possible types R(M) is.
 
 "data.py" file cycles through every possible module up to a given dimension and records the
 distribution of the four types, saving the data.
